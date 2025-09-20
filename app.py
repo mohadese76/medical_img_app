@@ -9,7 +9,7 @@ def load_model():
   model=tf.keras.models.load_model('./my-project/models/my_model.h5',compile=False)
   return model
 
-model = load_model_cached()
+model = load_model()
 
 # 2️⃣ عنوان اپلیکیشن
 st.title("Test My Tensorflow Model")
