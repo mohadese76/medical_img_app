@@ -1,11 +1,10 @@
 pandas
+seaborn
 numpy
 tensorflow
 streamlit
-pillow
+opencv-python
+plotly
 matplotlib
 scikit-learn
-pillow
-streamlit
-zipfile
-google.colab
+torch
