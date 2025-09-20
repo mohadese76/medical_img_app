@@ -1,0 +1,11 @@
+pandas
+numpy
+tensorflow
+streamlit
+pillow
+matplotlib
+scikit-learn
+pillow
+streamlit
+zipfile
+google.colab
