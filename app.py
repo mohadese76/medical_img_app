@@ -5,9 +5,6 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing import image
 import numpy as np
 
-# -------------------------------
-# Streamlit page config
-# -------------------------------
 st.set_page_config(page_title="Medical Image Classifier", layout="centered")
 st.title("Medical Image Classification App")
 
@@ -17,25 +14,28 @@ st.title("Medical Image Classification App")
 CLASS_LABELS = ["Normal", "Pneumonia"]
 
 # -------------------------------
+# Set model path relative to this file
+# -------------------------------
+BASE_DIR = os.path.dirname(__file__)  # مسیر پوشه‌ای که app.py در آن است
+MODEL_PATH = os.path.join(BASE_DIR, 'my_project', 'models', 'my_model.h5')
+
+st.write("Looking for model at:", MODEL_PATH)
+st.write("Exists?", os.path.exists(MODEL_PATH))
+
+# -------------------------------
 # Load model with caching
 # -------------------------------
 @st.cache_resource
-def load_model_cached():
-    import os
-    from tensorflow.keras.models import load_model
-    base_dir=os.path.dirname(__file__)
-    model_path = os.path.join(base_dir,'my_project','models','my_model.h5')
+def load_model_cached(model_path):
     if not os.path.exists(model_path):
         st.error(f"Model not found at {model_path}")
         return None
     model = load_model(model_path, compile=False)
     return model
 
-model = load_model_cached()
-st.write('model path:' , model_path)
-
+model = load_model_cached(MODEL_PATH)
 if model is None:
-    st.stop()  
+    st.stop()  # اگر مدل پیدا نشد، ادامه نده
 
 # -------------------------------
 # File uploader
@@ -54,10 +54,10 @@ if uploaded_file is not None:
     # -------------------------------
     # Preprocess image
     # -------------------------------
-    img = image.load_img(temp_file_path, target_size=(224, 224))  # اندازه مدل خودت
+    img = image.load_img(temp_file_path, target_size=(224, 224)) 
     img_array = image.img_to_array(img)
-    img_array = np.expand_dims(img_array, axis=0)  # اضافه کردن بعد batch
-    img_array /= 255.0  # نرمال‌سازی (اگر مدل شما نیاز دارد)
+    img_array = np.expand_dims(img_array, axis=0)
+    img_array /= 255.0  # نرمال‌سازی
     
     # -------------------------------
     # Make prediction
