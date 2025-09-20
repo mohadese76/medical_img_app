@@ -17,7 +17,7 @@ CLASS_LABELS = ["Normal", "Pneumonia"]
 # Set model path relative to this file
 # -------------------------------
 BASE_DIR = os.path.dirname(__file__)  # مسیر پوشه‌ای که app.py در آن است
-MODEL_PATH = os.path.join(BASE_DIR, 'my_project', 'models', 'my_model.h5')
+MODEL_PATH = os.path.join(BASE_DIR, 'models', 'my_model.h5')
 
 st.write("Looking for model at:", MODEL_PATH)
 st.write("Exists?", os.path.exists(MODEL_PATH))
