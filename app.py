@@ -21,7 +21,10 @@ CLASS_LABELS = ["Normal", "Pneumonia"]
 # -------------------------------
 @st.cache_resource
 def load_model_cached():
-    model_path = './my-project/models/my_model.h5'  
+    import os
+    from tensorflow.keras.models import load_model
+    base_dir=os.path.dirname(__file__)
+    model_path = os.path.join(base_dir,'my_project','models','my_model.h5')
     if not os.path.exists(model_path):
         st.error(f"Model not found at {model_path}")
         return None
@@ -29,6 +32,7 @@ def load_model_cached():
     return model
 
 model = load_model_cached()
+st.write('model path:' , model_path)
 
 if model is None:
     st.stop()  
