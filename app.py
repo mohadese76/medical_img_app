@@ -6,10 +6,10 @@ import numpy as np
 # 1️⃣ بارگذاری مدل
 @st.cache_data  # برای کش کردن مدل و جلوگیری از بارگذاری دوباره
 def load_model():
-  model=tf.keras.models.load_model('./my-project/models/my_model.h5')
+  model=tf.keras.models.load_model('./my-project/models/my_model.h5',compile=False)
   return model
 
-model = load_model()
+model = load_model_cached()
 
 # 2️⃣ عنوان اپلیکیشن
 st.title("Test My Tensorflow Model")
