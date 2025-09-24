@@ -40,7 +40,7 @@ def load_model_cached(path):
 model = load_model_cached(MODEL_PATH)
 
 if model is None:
-    st.stop()  # اگر مدل پیدا نشد، ادامه نده
+    st.stop()  
 
 # -------------------------------
 # Print model input shape
@@ -71,12 +71,11 @@ if uploaded_file is not None:
     img = image.load_img(temp_file_path, target_size=(target_height, target_width), color_mode=color_mode)
     img_array = image.img_to_array(img)
 
-    # اگر مدل تک کانال بود ولی تصویر شکلش درست نبود
     if channels==1 and img_array.shape[-1]!=1:
         img_array = np.expand_dims(img_array[:,:,0], axis=-1)
 
-    img_array = np.expand_dims(img_array, axis=0)  # اضافه کردن بعد batch
-    img_array /= 255.0  # نرمال‌سازی
+    img_array = np.expand_dims(img_array, axis=0)  
+    img_array /= 255.0 
 
     # -------------------------------
     # Make prediction
